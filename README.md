@@ -1,12 +1,5 @@
-# 🏗️ AWS Resilience Playbook — MAANGMULAN Edition
-
-[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/rnaarla/AWS_Resilience_Playbook/graphs/commit-activity)
-
-## Operational Guidelines and Design Patterns for Autonomous Cloud Systems
-
-> *"Resilience without reasoning is just automation waiting to fail."*
+# 🏗️ Resilience Playbook — MAANGMULAN Edition
+### Operational Guidelines and Design Patterns for Autonomous Cloud Systems
 
 This repository defines a next-generation framework for **autonomous infrastructure reliability**, transforming lessons from the 2025 DynamoDB outage into a blueprint for **unbreakable distributed systems**. It integrates AWS, Google SRE, Meta, and NVIDIA principles into a unified **Resilience Operating Framework (ROF)**.
 
