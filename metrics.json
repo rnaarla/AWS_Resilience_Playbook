@@ -1,0 +1,8 @@
+{
+    "MTTD": {"description": "Mean Time to Detect", "target": 60},
+    "MTTR": {"description": "Mean Time to Recover", "target": 1800},
+    "CFI": {"description": "Change Failure Index", "target": 0.01},
+    "BRI": {"description": "Blast Radius Index", "target": 1},
+    "ADI": {"description": "Automation Drift Index", "target": 0.1},
+    "CIS": {"description": "Causal Integrity Score", "target": 0.95}
+}
