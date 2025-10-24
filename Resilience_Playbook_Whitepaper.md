@@ -1,5 +1,5 @@
 
-# 🏗️d and commit  AWS-Style Whitepaper: Resilience Playbook
+# 🏗️ AWS-Style Whitepaper: Resilience Playbook
 ### *Operational Guidelines and SRE Design Patterns for Autonomous Cloud Systems*
 **Author:** Office of the Chief Architect  
 **Date:** October 2025  
