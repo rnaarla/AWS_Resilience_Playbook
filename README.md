@@ -1,4 +1,4 @@
-# 🏗️ Resilience Playbook — MAANGMULAN Edition
+# 🏗️ Resilience Playbook
 ### Operational Guidelines and Design Patterns for Autonomous Cloud Systems
 
 This repository defines a next-generation framework for **autonomous infrastructure reliability**, transforming lessons from the 2025 DynamoDB outage into a blueprint for **unbreakable distributed systems**. It integrates AWS, Google SRE, Meta, and NVIDIA principles into a unified **Resilience Operating Framework (ROF)**.
