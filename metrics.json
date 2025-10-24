@@ -1,8 +1,176 @@
 {
-    "MTTD": {"description": "Mean Time to Detect", "target": 60},
-    "MTTR": {"description": "Mean Time to Recover", "target": 1800},
-    "CFI": {"description": "Change Failure Index", "target": 0.01},
-    "BRI": {"description": "Blast Radius Index", "target": 1},
-    "ADI": {"description": "Automation Drift Index", "target": 0.1},
-    "CIS": {"description": "Causal Integrity Score", "target": 0.95}
+    "version": "2.0",
+    "last_updated": "2025-10-24",
+    "metrics": {
+        "MTTD": {
+            "name": "Mean Time to Detect",
+            "description": "Average time from fault occurrence to detection by monitoring systems",
+            "unit": "seconds",
+            "target": 60,
+            "threshold_warning": 120,
+            "threshold_critical": 300,
+            "calculation": "sum(detection_timestamp - fault_timestamp) / count(incidents)",
+            "data_source": "CloudWatch, Datadog, or Prometheus",
+            "alert_on": "breach of threshold_warning",
+            "review_frequency": "weekly",
+            "owner": "SRE Team"
+        },
+        "MTTR": {
+            "name": "Mean Time to Recover",
+            "description": "Average time from fault detection to full service restoration",
+            "unit": "seconds",
+            "target": 1800,
+            "threshold_warning": 3600,
+            "threshold_critical": 7200,
+            "calculation": "sum(recovery_timestamp - detection_timestamp) / count(incidents)",
+            "data_source": "Incident Management System (PagerDuty, Opsgenie)",
+            "alert_on": "breach of threshold_warning",
+            "review_frequency": "weekly",
+            "owner": "SRE Team"
+        },
+        "CFI": {
+            "name": "Change Failure Index",
+            "description": "Ratio of failed changes to total changes deployed",
+            "unit": "ratio",
+            "target": 0.01,
+            "threshold_warning": 0.05,
+            "threshold_critical": 0.10,
+            "calculation": "count(failed_changes) / count(total_changes)",
+            "data_source": "CI/CD Pipeline (Jenkins, GitLab CI, GitHub Actions)",
+            "alert_on": "breach of threshold_warning",
+            "review_frequency": "daily",
+            "owner": "Platform Engineering"
+        },
+        "BRI": {
+            "name": "Blast Radius Index",
+            "description": "Number of dependent services impacted by a single failure",
+            "unit": "count",
+            "target": 1,
+            "threshold_warning": 3,
+            "threshold_critical": 5,
+            "calculation": "count(distinct affected_services per incident)",
+            "data_source": "Service Dependency Graph + Incident Reports",
+            "alert_on": "breach of threshold_warning",
+            "review_frequency": "per-incident",
+            "owner": "Architecture Team"
+        },
+        "ADI": {
+            "name": "Automation Drift Index",
+            "description": "Measure of configuration deviation between actual and desired state",
+            "unit": "delta_ratio",
+            "target": 0.1,
+            "threshold_warning": 0.3,
+            "threshold_critical": 0.5,
+            "calculation": "sum(abs(actual_state - desired_state)) / count(configs)",
+            "data_source": "Configuration Management (Terraform, Ansible, CloudFormation)",
+            "alert_on": "breach of threshold_warning",
+            "review_frequency": "daily",
+            "owner": "Infrastructure Team"
+        },
+        "CIS": {
+            "name": "Causal Integrity Score",
+            "description": "Percentage of automation decisions with validated causal reasoning",
+            "unit": "ratio",
+            "target": 0.95,
+            "threshold_warning": 0.85,
+            "threshold_critical": 0.75,
+            "calculation": "count(validated_causal_decisions) / count(total_automation_decisions)",
+            "data_source": "Causal Graph Engine + Audit Logs",
+            "alert_on": "breach of threshold_warning",
+            "review_frequency": "daily",
+            "owner": "AI/ML Platform Team"
+        },
+        "MTTM": {
+            "name": "Mean Time to Mitigate",
+            "description": "Average time from detection to temporary workaround deployment",
+            "unit": "seconds",
+            "target": 1800,
+            "threshold_warning": 3600,
+            "threshold_critical": 5400,
+            "calculation": "sum(mitigation_timestamp - detection_timestamp) / count(incidents)",
+            "data_source": "Incident Management System",
+            "alert_on": "breach of threshold_warning",
+            "review_frequency": "weekly",
+            "owner": "SRE Team"
+        },
+        "MTTHI": {
+            "name": "Mean Time to Human Intervention",
+            "description": "Average time from alert to human operator engagement",
+            "unit": "seconds",
+            "target": 300,
+            "threshold_warning": 600,
+            "threshold_critical": 1200,
+            "calculation": "sum(human_engagement_timestamp - alert_timestamp) / count(incidents)",
+            "data_source": "Incident Management System + Chat Ops Logs",
+            "alert_on": "breach of threshold_warning",
+            "review_frequency": "weekly",
+            "owner": "On-Call Team"
+        },
+        "RMI": {
+            "name": "Resilience Maturity Index",
+            "description": "Overall organizational maturity score (0-5 scale)",
+            "unit": "level",
+            "target": 4,
+            "threshold_warning": 3,
+            "threshold_critical": 2,
+            "calculation": "weighted_average(automation_maturity, observability_maturity, governance_maturity)",
+            "data_source": "Quarterly Maturity Assessments",
+            "alert_on": "decline in score",
+            "review_frequency": "quarterly",
+            "owner": "Engineering Leadership"
+        },
+        "FIR": {
+            "name": "Fault Isolation Ratio",
+            "description": "Percentage of faults contained within single fault domain",
+            "unit": "ratio",
+            "target": 0.95,
+            "threshold_warning": 0.85,
+            "threshold_critical": 0.75,
+            "calculation": "count(single_domain_faults) / count(total_faults)",
+            "data_source": "Incident Analysis Reports",
+            "alert_on": "breach of threshold_warning",
+            "review_frequency": "monthly",
+            "owner": "Resilience Engineering"
+        }
+    },
+    "dashboards": {
+        "executive": {
+            "refresh_rate": "5m",
+            "metrics": ["MTTD", "MTTR", "CFI", "RMI"],
+            "url": "/dashboards/executive-resilience"
+        },
+        "sre": {
+            "refresh_rate": "1m",
+            "metrics": ["MTTD", "MTTR", "MTTM", "MTTHI", "BRI", "FIR"],
+            "url": "/dashboards/sre-operations"
+        },
+        "engineering": {
+            "refresh_rate": "5m",
+            "metrics": ["CFI", "ADI", "CIS", "BRI"],
+            "url": "/dashboards/engineering-quality"
+        }
+    },
+    "alerting_rules": {
+        "critical_incidents": {
+            "condition": "MTTD > 300 OR MTTR > 7200 OR BRI > 5",
+            "severity": "P1",
+            "notification_channels": ["pagerduty", "slack-critical", "email-leadership"]
+        },
+        "quality_degradation": {
+            "condition": "CFI > 0.05 OR CIS < 0.85",
+            "severity": "P2",
+            "notification_channels": ["slack-sre", "email-team"]
+        },
+        "maturity_regression": {
+            "condition": "RMI < 3 OR FIR < 0.85",
+            "severity": "P3",
+            "notification_channels": ["slack-engineering", "email-leadership"]
+        }
+    },
+    "reporting": {
+        "frequency": "weekly",
+        "recipients": ["sre-team@company.com", "engineering-leadership@company.com"],
+        "format": "pdf",
+        "sections": ["executive_summary", "metric_trends", "incident_analysis", "recommendations"]
+    }
 }
